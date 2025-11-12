@@ -84,7 +84,8 @@ def get_dataloaders(data_config, use_cuda):
     # vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
     # TODO: Create the Caltech101 dataset
     #       The variable rootdir is useful
-    base_dataset = None
+    from torchvision.datasets import Caltech101
+    base_dataset = Caltech101(root=root_dir)
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     logging.info(f"  - I loaded {len(base_dataset)} samples")
@@ -98,8 +99,10 @@ def get_dataloaders(data_config, use_cuda):
     # vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
     # TODO : Create the train and valid splits. The torch.utils.data.Subset
     #        class is useful for this purpose
-    train_dataset = None
-    valid_dataset = None
+    from torch.utils.data import Subset
+    train_dataset = Subset(base_dataset, train_indices)
+    valid_dataset = Subset(base_dataset, valid_indices)
+
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     preprocess_transforms = [
@@ -123,8 +126,20 @@ def get_dataloaders(data_config, use_cuda):
     # vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
     # TODO: Create the train and valid dataloaders
     # from their respective datasets
-    train_loader = None
-    valid_loader = None
+    from torch.utils.data import DataLoader
+
+    train_loader = DataLoader(dataset = train_dataset,
+                                batch_size = batch_size,
+                                shuffle = True,
+                                num_workers = num_workers,
+                                pin_memory = use_cuda)
+    
+    valid_loader = DataLoader(dataset = valid_dataset,
+                                batch_size = batch_size,
+                                shuffle = False,
+                                num_workers = num_workers,
+                                pin_memory = use_cuda)
+    
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     num_classes = len(base_dataset.categories)
     input_size = tuple(train_dataset[0][0].shape)
@@ -134,7 +149,7 @@ def get_dataloaders(data_config, use_cuda):
 
 def test_dataloaders():
     data_config = {
-        "root_dir": "/mounts/Datasets4",
+        "root_dir": "/mounts/datasets/datasets",
         "valid_ratio": 0.2,
         "batch_size": 32,
         "num_workers": 0,
