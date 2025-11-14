@@ -28,7 +28,7 @@ def test_linear():
     # vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
     # TODO
     # Fill in the expected output size
-    expected_output_size = None
+    expected_output_size = (batch_size, *input_size)
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     assert expected_output_size == output.shape
     print(f"Output tensor of size : {output.shape}")
