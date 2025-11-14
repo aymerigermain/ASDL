@@ -16,7 +16,10 @@ def Linear(cfg, input_size, num_classes):
     """
     # TODO: Implement a simple linear model
     # vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-    layers = []
+    layers = [
+        nn.Flatten(),
+        nn.Linear(input_size[0] * input_size[1] * input_size[2], num_classes)
+    ]
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     return nn.Sequential(*layers)
