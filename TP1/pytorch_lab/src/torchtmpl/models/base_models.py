@@ -36,6 +36,17 @@ def FFN(cfg, input_size, num_classes):
     use_dropout = cfg.get("use_dropout", False)
     # TODO: Implement a simple linear model
     # vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-    layers = []
+    layers = [nn.Flatten(),
+              nn.Linear(input_size[0] * input_size[1] * input_size[2], num_hidden),
+              nn.ReLU()]
+    
+    for _ in range(num_layers-1):
+        if use_dropout:
+            layers.append(nn.Dropout())
+        layers.append(nn.Linear(num_hidden,num_hidden))
+        layers.append(nn.ReLU())
+    
+    layers.append(nn.Linear(num_hidden, num_classes))
+
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     return nn.Sequential(*layers)
