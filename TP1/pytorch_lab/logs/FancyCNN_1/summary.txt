@@ -1,0 +1,79 @@
+Logdir : logs/FancyCNN_1
+## Command 
+/usr/users/ia2vr/ia2vr_11/Documents/ASDL/ASDL/TP1/pytorch_lab/src/torchtmpl/main.py config.yaml train
+
+ Config : {'data': {'root_dir': '/mounts/datasets/datasets', 'batch_size': 128, 'num_workers': 4, 'valid_ratio': 0.2}, 'nepochs': 20, 'logging': {'logdir': './logs'}, 'model': {'class': 'FancyCNN', 'num_blocks': 3}} 
+
+## Summary of the model architecture
+==========================================================================================
+Layer (type:depth-idx)                   Output Shape              Param #
+==========================================================================================
+FancyCNN                                 [128, 101]                --
+├─Sequential: 1-1                        [128, 128, 1, 1]          --
+│    └─Conv2d: 2-1                       [128, 16, 128, 128]       448
+│    └─ReLU: 2-2                         [128, 16, 128, 128]       --
+│    └─BatchNorm2d: 2-3                  [128, 16, 128, 128]       32
+│    └─Conv2d: 2-4                       [128, 16, 128, 128]       2,320
+│    └─ReLU: 2-5                         [128, 16, 128, 128]       --
+│    └─BatchNorm2d: 2-6                  [128, 16, 128, 128]       32
+│    └─Conv2d: 2-7                       [128, 32, 64, 64]         2,080
+│    └─ReLU: 2-8                         [128, 32, 64, 64]         --
+│    └─BatchNorm2d: 2-9                  [128, 32, 64, 64]         64
+│    └─Conv2d: 2-10                      [128, 32, 64, 64]         9,248
+│    └─ReLU: 2-11                        [128, 32, 64, 64]         --
+│    └─BatchNorm2d: 2-12                 [128, 32, 64, 64]         64
+│    └─Conv2d: 2-13                      [128, 32, 64, 64]         9,248
+│    └─ReLU: 2-14                        [128, 32, 64, 64]         --
+│    └─BatchNorm2d: 2-15                 [128, 32, 64, 64]         64
+│    └─Conv2d: 2-16                      [128, 64, 32, 32]         8,256
+│    └─ReLU: 2-17                        [128, 64, 32, 32]         --
+│    └─BatchNorm2d: 2-18                 [128, 64, 32, 32]         128
+│    └─Conv2d: 2-19                      [128, 64, 32, 32]         36,928
+│    └─ReLU: 2-20                        [128, 64, 32, 32]         --
+│    └─BatchNorm2d: 2-21                 [128, 64, 32, 32]         128
+│    └─Conv2d: 2-22                      [128, 64, 32, 32]         36,928
+│    └─ReLU: 2-23                        [128, 64, 32, 32]         --
+│    └─BatchNorm2d: 2-24                 [128, 64, 32, 32]         128
+│    └─Conv2d: 2-25                      [128, 128, 16, 16]        32,896
+│    └─ReLU: 2-26                        [128, 128, 16, 16]        --
+│    └─BatchNorm2d: 2-27                 [128, 128, 16, 16]        256
+│    └─AdaptiveAvgPool2d: 2-28           [128, 128, 1, 1]          --
+├─Linear: 1-2                            [128, 101]                13,029
+==========================================================================================
+Total params: 152,277
+Trainable params: 152,277
+Non-trainable params: 0
+Total mult-adds (G): 28.43
+==========================================================================================
+Input size (MB): 25.17
+Forward/backward pass size (MB): 2348.91
+Params size (MB): 0.61
+Estimated Total Size (MB): 2374.69
+==========================================================================================
+
+## Loss
+
+CrossEntropyLoss()
+
+## Datasets : 
+Train : WrappedDataset(dataset=<torch.utils.data.dataset.Subset object at 0x7f5a11f50640>, transform=Compose(
+      ToImage()
+      GrayToRGB()
+      Resize(size=[128], interpolation=InterpolationMode.BILINEAR, antialias=True)
+      RandomCrop(size=(128, 128), pad_if_needed=False, fill=0, padding_mode=constant)
+      ToDtype(scale=True)
+      Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], inplace=False)
+      RandomHorizontalFlip(p=0.5)
+      RandomRotation(degrees=[-15.0, 15.0], interpolation=InterpolationMode.NEAREST, expand=False, fill=0)
+      ColorJitter(brightness=(0.8, 1.2), contrast=(0.8, 1.2), saturation=(0.8, 1.2), hue=(-0.1, 0.1))
+      RandomPerspective(p=0.5, distortion_scale=0.2, interpolation=InterpolationMode.BILINEAR, fill=0)
+      RandomAffine(degrees=[0.0, 0.0], translate=(0.1, 0.1), interpolation=InterpolationMode.NEAREST, fill=0)
+))
+Validation : WrappedDataset(dataset=<torch.utils.data.dataset.Subset object at 0x7f5a11f50cd0>, transform=Compose(
+      ToImage()
+      GrayToRGB()
+      Resize(size=[128], interpolation=InterpolationMode.BILINEAR, antialias=True)
+      RandomCrop(size=(128, 128), pad_if_needed=False, fill=0, padding_mode=constant)
+      ToDtype(scale=True)
+      Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], inplace=False)
+))

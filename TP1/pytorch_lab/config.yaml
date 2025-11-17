@@ -10,8 +10,13 @@ nepochs: 20
 logging:
   logdir: "./logs"  # Better to provide the fullpath, especially on the cluster
 
+# model:
+#   class: FFN
+#   num_layers: 5
+#   hidden_dim: 128
+#   use_dropout: True
+
+
 model:
-  class: FFN
-  num_layers: 5
-  hidden_dim: 128
-  use_dropout: True
+  class: FancyCNN
+  num_blocks: 3

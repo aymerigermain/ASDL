@@ -113,7 +113,13 @@ def get_dataloaders(data_config, use_cuda):
         v2.ToDtype(torch.float32, scale=True),
         v2.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
     ]
+    # Data augmentation transforms for the training set
     augmentation_transforms = [
+        v2.RandomHorizontalFlip(), # Flip the image horizontally with a probability of 0.5
+        v2.RandomRotation(degrees=15), # Rotate the image randomly within a range of -15 to 15 degrees
+        v2.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.1), # Randomly change the brightness, contrast, saturation, and hue
+        v2.RandomPerspective(distortion_scale=0.2, p=0.5), # Apply random perspective transformation with a probability of 0.5
+        v2.RandomAffine(degrees=0, translate=(0.1, 0.1)) # Randomly translate the image by up to 10% in both x and y directions
     ]
 
     train_transforms = v2.Compose(preprocess_transforms + augmentation_transforms)

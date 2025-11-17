@@ -39,13 +39,25 @@ class FancyCNN(nn.Module):
         super().__init__()
         layers = []
         cin = input_size[0]
-        # vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-        # TODO: Implement the model
+        base_ch = cfg.get("base_channels", 16)
+        # Build N blocks. Each block: conv_relu_bn(cin -> out_ch),
+        # conv_relu_bn(out_ch -> out_ch), conv_down(out_ch -> out_ch*2)
+        for i in range(cfg["num_blocks"]):
+            out_ch = base_ch * (2 ** i)
+            layers += conv_relu_bn(cin, out_ch)
+            layers += conv_relu_bn(out_ch, out_ch)
+            layers += conv_down(out_ch, out_ch * 2)
+            cin = out_ch * 2
+
+        # Global Average Pooling -> (B, C, 1, 1)
+        layers += [nn.AdaptiveAvgPool2d((1, 1))]
         self.model = nn.Sequential(*layers)
-        # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+        # Final classifier
+        self.classifier = nn.Linear(cin, num_classes)
 
     def forward(self, x):
-        # vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-        # TODO: Implement the forward pass
+        x = self.model(x)            # (B, C, 1, 1)
+        x = torch.flatten(x, 1)     # (B, C)
+        x = self.classifier(x)      # (B, num_classes)
         return x
-        # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

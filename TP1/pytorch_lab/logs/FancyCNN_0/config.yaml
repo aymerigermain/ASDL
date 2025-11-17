@@ -1,0 +1,11 @@
+data:
+  batch_size: 128
+  num_workers: 4
+  root_dir: /mounts/datasets/datasets
+  valid_ratio: 0.2
+logging:
+  logdir: ./logs
+model:
+  class: FancyCNN
+  num_blocks: 3
+nepochs: 20
