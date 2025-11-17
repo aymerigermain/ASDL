@@ -56,4 +56,4 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     useless_function()
     test_linear()
-    test_fnn(
+    test_fnn()
