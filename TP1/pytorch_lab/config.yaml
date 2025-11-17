@@ -12,3 +12,6 @@ logging:
 
 model:
   class: FFN
+  num_layers: 5
+  hidden_dim: 128
+  use_dropout: True
