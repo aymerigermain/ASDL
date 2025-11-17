@@ -31,8 +31,8 @@ def FFN(cfg, input_size, num_classes):
     input_size: (C, H, W) input size tensor
     num_classes: int
     """
-    num_layers = cfg.get("num_layers", 1)
-    num_hidden = cfg.get("num_hidden", 32)
+    num_layers = cfg.get("num_layers", 5)
+    num_hidden = cfg.get("num_hidden", 128)
     use_dropout = cfg.get("use_dropout", False)
     # TODO: Implement a simple linear model
     # vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv

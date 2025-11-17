@@ -1,0 +1,56 @@
+Logdir : logs/FFN_4
+## Command 
+/usr/users/ia2vr/ia2vr_11/Documents/ASDL/ASDL/TP1/pytorch_lab/src/torchtmpl/main.py config.yaml train
+
+ Config : {'data': {'root_dir': '/mounts/datasets/datasets', 'batch_size': 128, 'num_workers': 4, 'valid_ratio': 0.2}, 'nepochs': 20, 'logging': {'logdir': './logs'}, 'model': {'class': 'FFN'}} 
+
+## Summary of the model architecture
+==========================================================================================
+Layer (type:depth-idx)                   Output Shape              Param #
+==========================================================================================
+Sequential                               [128, 101]                --
+├─Flatten: 1-1                           [128, 49152]              --
+├─Linear: 1-2                            [128, 128]                6,291,584
+├─ReLU: 1-3                              [128, 128]                --
+├─Linear: 1-4                            [128, 128]                16,512
+├─ReLU: 1-5                              [128, 128]                --
+├─Linear: 1-6                            [128, 128]                16,512
+├─ReLU: 1-7                              [128, 128]                --
+├─Linear: 1-8                            [128, 128]                16,512
+├─ReLU: 1-9                              [128, 128]                --
+├─Linear: 1-10                           [128, 128]                16,512
+├─ReLU: 1-11                             [128, 128]                --
+├─Linear: 1-12                           [128, 101]                13,029
+==========================================================================================
+Total params: 6,370,661
+Trainable params: 6,370,661
+Non-trainable params: 0
+Total mult-adds (M): 815.44
+==========================================================================================
+Input size (MB): 25.17
+Forward/backward pass size (MB): 0.76
+Params size (MB): 25.48
+Estimated Total Size (MB): 51.41
+==========================================================================================
+
+## Loss
+
+CrossEntropyLoss()
+
+## Datasets : 
+Train : WrappedDataset(dataset=<torch.utils.data.dataset.Subset object at 0x7fdad4974040>, transform=Compose(
+      ToImage()
+      GrayToRGB()
+      Resize(size=[128], interpolation=InterpolationMode.BILINEAR, antialias=True)
+      RandomCrop(size=(128, 128), pad_if_needed=False, fill=0, padding_mode=constant)
+      ToDtype(scale=True)
+      Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], inplace=False)
+))
+Validation : WrappedDataset(dataset=<torch.utils.data.dataset.Subset object at 0x7fdad49740d0>, transform=Compose(
+      ToImage()
+      GrayToRGB()
+      Resize(size=[128], interpolation=InterpolationMode.BILINEAR, antialias=True)
+      RandomCrop(size=(128, 128), pad_if_needed=False, fill=0, padding_mode=constant)
+      ToDtype(scale=True)
+      Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], inplace=False)
+))

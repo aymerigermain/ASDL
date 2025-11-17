@@ -51,6 +51,8 @@ def train(config):
     # vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
     # TODO : Define the optimizer Adam
     optimizer = torch.optim.Adam(model.parameters())
+    # TODO : Define the optimizer AdamW with weighted decay 1e-4
+    # optimizer = torch.optim.AdamW(model.parameters(), weight_decay=1e-4)
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # Build the callbacks
