@@ -1,0 +1,14 @@
+data:
+  root_dir: '/mounts/datasets/datasets'
+  batch_size: 128
+  num_workers: 4
+  valid_ratio: 0.2
+
+
+nepochs: 20
+
+logging:
+  logdir: "./logs"  # Better to provide the fullpath, especially on the cluster
+
+model:
+  class: FFN

@@ -49,8 +49,8 @@ def train(config):
     # Build the optimizer
     logging.info("= Optimizer")
     # vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-    # TODO : Define the optimizer
-    optimizer = optim.Adam(model.parameters())
+    # TODO : Define the optimizer Adam
+    optimizer = torch.optim.Adam(model.parameters())
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     # Build the callbacks
