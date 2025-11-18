@@ -1,0 +1,6 @@
+click
+deepcs
+matplotlib
+tensorboard
+albumentations
+timm
