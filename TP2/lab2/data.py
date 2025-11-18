@@ -229,8 +229,14 @@ def plot_samples(dataset_dir):
 
     crop_size = 256
 
-    # On ajoutera des augmentations ici
-    augmentation_transforms = []
+    # On ajoutera des augmentations ici en utilisant albumentations
+    augmentation_transforms = [
+        A.HorizontalFlip(p=0.5), # flip horizontal avec probabilité 0.5
+        A.ShiftScaleRotate(shift_limit=0.0, scale_limit=0.15, rotate_limit=45, p=0.5), # translation, zoom et rotation aléatoires
+        A.CoarseDropout(p=0.5, max_width=16, max_height=16), # masque carré aléatoire
+        A.PixelDropout(p=0.5), # pixels aléatoires
+        A.MaskDropout(p=0.5), # zones aléatoires
+    ]
     resize_transforms = [
         A.SmallestMaxSize(max_size=crop_size),
         A.RandomCrop(height=crop_size, width=crop_size),
