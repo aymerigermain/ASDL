@@ -160,8 +160,20 @@ def test_timm():
     f3 = model.layer3(f2)
     f4 = model.layer4(f3)
 
+    print(f"f1 shape: {f1.shape}")
+    print(f"f2 shape: {f2.shape}")
+    print(f"f3 shape: {f3.shape}")
+    print(f"f4 shape: {f4.shape}")
+
+    assert f1.shape == (1, 64, 64, 64)
+    assert f2.shape == (1, 128, 32, 32)
+    assert f3.shape == (1, 256, 16, 16)
+    assert f4.shape == (1, 512, 8, 8)
+
 
 
 if __name__ == "__main__":
-    # test_timm()
-    test_unet()
+    print("Testing Timm Encoder:")
+    test_timm()
+    # print("\nTesting UNet:")
+    # test_unet()
