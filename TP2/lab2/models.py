@@ -72,11 +72,11 @@ class DecoderBlock(nn.Module):
         # # vvvvvvvvv
         # # CODE HERE
         x = self.conv1(x)
-        print(f"DecoderBlock conv1 output shape: {x.shape}")
+        # print(f"DecoderBlock conv1 output shape: {x.shape}")
         x = self.up_conv(x)
-        print(f"DecoderBlock up_conv output shape: {x.shape}")
+        # print(f"DecoderBlock up_conv output shape: {x.shape}")
         x = self.conv2(x)
-        print(f"DecoderBlock conv2 output shape: {x.shape}")
+        # print(f"DecoderBlock conv2 output shape: {x.shape}")
         # # ^^^^^^^^^
 
         # On concatène les features de l'encoder
@@ -84,14 +84,14 @@ class DecoderBlock(nn.Module):
         # # vvvvvvvvv
         # # CODE HERE
         x = torch.cat((x, f_encoder), dim=1)
-        print(f"DecoderBlock concat output shape: {x.shape}")
+        # print(f"DecoderBlock concat output shape: {x.shape}")
         # # ^^^^^^^^^
 
         # On applique la dernière convolution
         # # vvvvvvvvv
         # # CODE HERE
         out = self.conv3(x)
-        print(f"DecoderBlock conv3 output shape: {out.shape}")
+        # print(f"DecoderBlock conv3 output shape: {out.shape}")
         # # ^^^^^^^^^
 
         return out
